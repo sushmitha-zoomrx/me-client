@@ -1,0 +1,14 @@
+.alert {
+    width: max-content;
+    padding: 10px;
+    background: #fff;
+    color: #ff4b4b;
+    margin: 0 auto 25px auto;
+    border-radius: 35px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &__icon {
+        margin-right: 2px;
+    }
+}

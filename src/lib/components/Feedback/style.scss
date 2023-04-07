@@ -1,0 +1,12 @@
+.conversation-feedback {
+	display: flex;
+	column-gap: 6px;
+	align-items: flex-start;
+
+	button {
+		padding: 0.25rem;
+		border: none;
+		cursor: pointer;
+		background-color: #f8fafb;
+	}
+}

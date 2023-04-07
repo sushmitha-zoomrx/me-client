@@ -1,0 +1,82 @@
+.feedback-dialog {
+	&__header {
+		font-weight: 500;
+		font-size: 1.5rem;
+		line-height: 28px;
+		color: #000000;
+		margin-bottom: 1.5rem;
+
+		img {
+			padding-right: 1rem;
+		}
+	}
+
+	&__body {
+		&-comment {
+			font-family: 'Montserrat', sans-serif;
+			background: rgb(244, 245, 247);
+			border-radius: 8px;
+			border: none;
+			width: 100%;
+			resize: none;
+			height: 120px;
+			padding: 1rem;
+			line-height: 20px;
+			font-size: 1.1rem;
+            color: #42526E;
+
+			&::placeholder {
+				color: #7a869a;
+				font-weight: 400;
+			}
+
+			&:focus {
+				outline: none;
+			}
+		}
+		&-tags {
+			margin-top: 1rem;
+		}
+	}
+
+	&__footer {
+		margin-top: 1.5rem;
+
+		&-action {
+			width: 28%;
+			min-width: 150px;
+            margin-left: auto;
+		}
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.feedback-dialog {
+		&__header {
+			font-size: 1rem;
+			margin-bottom: 1rem;
+
+			img {
+				padding-right: 0.5rem;
+				width: 40px;
+				height: 40px
+			}
+		}
+
+		&__body {
+			&-comment {
+				font-size: 0.9rem;
+				height: 90px;
+				padding: 0.5rem;
+			}
+
+			&-tags {
+				margin-top: 0.5rem;
+			}
+		}
+
+		&__footer {
+			margin-top: 1rem;
+		}
+	}
+}
