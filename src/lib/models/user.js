@@ -1,8 +1,8 @@
 import { sessionInfo } from '../stores/auth.store';
 
-export async function login({ useremail }) {
+export async function login() {
 	sessionInfo.set({
-		email: useremail,
+		email: 'demo@example.com',
 	});
 }
 

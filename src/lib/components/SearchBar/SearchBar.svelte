@@ -42,6 +42,7 @@
 	<span
 		bind:this={searchBarElement}
 		role="textbox"
+		tabindex="0"
 		contenteditable="true"
 		data-ph={placeholder}
 		class="search-bar__text"

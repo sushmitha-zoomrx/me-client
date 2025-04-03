@@ -1,30 +1,30 @@
 <script>
     import Button from "@components/Button/Button.svelte";
-    import { validateEmail } from "@utils/validation";
+    // import { validateEmail } from "@utils/validation";
     import { pushToast } from "@components/Toast/toasts";
     import { spinner } from "@components/Spinner/Spinner";
     import { previousUrl } from "@stores/auth.store";
     import { login } from "@models/user";
     import zrxLogo from "../../assets/svg/zoomrx_logo.png";
 
-    let useremail = "",
-        isInvalidCredential = false;
+    // let useremail = "",
+    //     isInvalidCredential = false;
 
     let loginHandle = async () => {
-        if (useremail === "" || !validateEmail(useremail)) {
-            isInvalidCredential = true;
-            return;
-        }
+        // if (useremail === "" || !validateEmail(useremail)) {
+        //     isInvalidCredential = true;
+        //     return;
+        // }
         try {
             spinner.showSpinner();
-            await login({
-                useremail,
-            });
-            isInvalidCredential = false;
+            await login(
+                // {useremail}
+            );
+            // isInvalidCredential = false;
             redirectUser();
         } catch (error) {
             if (error === 401) {
-                isInvalidCredential = true;
+                // isInvalidCredential = true;
                 return;
             }
             pushToast("Something went wrong! Please try again later");
@@ -56,7 +56,7 @@
         across channels using the power of GPT and ZoomRx Message Benchmarks
     </h3>
     <section class="login__container">
-        <div class="alert" class:login__alert--hidden={!isInvalidCredential}>
+        <!-- <div class="alert" class:login__alert--hidden={!isInvalidCredential}>
             Invalid EmailID
         </div>
         <div>
@@ -68,7 +68,7 @@
                     placeholder="Your Official Email ID"
                 />
             </div>
-        </div>
+        </div> -->
         <div class="login__login-btn">
             <Button
                 type="positive"

@@ -60,21 +60,9 @@
 			question: question,
 			email: get(email),
 		});
-		const tableIds = [];
 		console.log("Response received");
 		console.log(responseData);
-		responseData.answer = responseData.data.replaceAll(
-			/<table>/g,
-			function () {
-				const tableId = `table-${uuidv4()}`;
-				tableIds.push(tableId);
-				return `<table id="${tableId}">`;
-			}
-		);
-		if (tableIds.length) {
-			conversations[index][conversations[index].length - 1].tableIds =
-				tableIds;
-		}
+		responseData.answer = responseData.data;
 		conversations[index][conversations[index].length - 1].response =
 			responseData;
 		conversations[index][
@@ -82,29 +70,7 @@
 		].isRenderingComplete = true;
 		isSearchInprogress = false;
 	}
-	async function getCustomResponse(question, index) {
-		if (question.toLowerCase().trim() === EXPORT_TABLE_AS_PPT_QUESTION) {
-			await exportHtmlTableAsPPT(index);
-		}
-	}
-	async function exportHtmlTableAsPPT(index) {
-		const lastConversation =
-			conversations[index - 1][conversations[index - 1].length - 1];
-		if (!lastConversation.tableIds || index < 1) {
-			conversations[index][conversations[index].length - 1].response = {
-				answer: "No tables found in the previous response.",
-			};
-			return;
-		}
-		let pptx = new pptxgen();
-		lastConversation.tableIds.forEach((tableId) => {
-			pptx.tableToSlides(tableId);
-		});
-		await pptx.writeFile({ fileName: "presentation.pptx" });
-		conversations[index][conversations[index].length - 1].response = {
-			answer: "Previous response tables are downloaded as PPT.",
-		};
-	}
+
 	async function generateResponse(question, index = conversations.length) {
 		questionSearch = "";
 		if (question === "") {
@@ -122,11 +88,8 @@
 		await scrollChatContainerToBottom();
 		isSearchInprogress = true;
 		try {
-			if (CUSTOM_QUESTIONS.includes(question.toLowerCase().trim())) {
-				await getCustomResponse(question, index);
-			} else {
-				await getResponseFromServer(question, index);
-			}
+			await getResponseFromServer(question, index);
+
 		} catch (error) {
 			conversations[index][conversations[index].length - 1].error = true;
 			isSearchInprogress = false;

@@ -52,6 +52,15 @@
 	height: 100%;
 	background: #ffffffcf;
 
+	h1 {
+		margin-bottom: 10px;
+	}
+
+	h3 {
+		margin-top: 0;
+		margin-bottom: 10px;
+	}
+
 	&__logo {
 		height: 60px;
 		width: 150px;
@@ -61,28 +70,23 @@
 	&__container {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		height: 50%;
+		min-height: 25%;
+		justify-content: flex-start;
 		width: 80%;
 		max-width: 500px;
-		min-height: 300px;
-		margin: 10px 0 70px 0;
+		margin: 0;
 	}
 
 	&__username {
-		margin-top: 30px;
-		margin-bottom: 50px;
+		margin-top: 0;
+		margin-bottom: 5px;
 	}
 
 	&__login-btn {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-top: 10px;
-
-		// &--hidden {
-		// 	visibility: hidden;
-		// }
+		margin-top: 50px;
 	}
 
 	&__alert--hidden {
@@ -92,23 +96,13 @@
 	&__footer {
 		display: flex;
 		align-items: center;
-		justify-content: flex-end;
+		justify-content: center;
 		flex-direction: column;
-		position: absolute;
-		bottom: 10px;
-		left: 0;
-		margin: 0 auto;
 		width: 100%;
-		padding: 10px;
+		padding: 2px;
 		text-align: center;
 		color: #141414;
-		mix-blend-mode: normal;
-		z-index: 10;
-
-		&-info {
-			margin-top: 0.5rem;
-			color: #78858a;
-			font-size: 14px;
-		}
+		margin-top: 1px;
+		font-size: 14px;
 	}
 }
