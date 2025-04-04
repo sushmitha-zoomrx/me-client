@@ -9,9 +9,9 @@
 			name: "Examples",
 			clickable: true,
 			content: [
-				"Create 5 messages for Trelegy talking about once daily dosing",
-				"Create 5 messages about Opdivo for mDOR of 24.5 months among responders",
-				'Predict the score of "Our goal is to help make AMJEVITA onboarding seamless"',
+				"What is the message effectiveness of '72% of treatment-resistant hypertension patients achieved target BP with [Product] in 8 weeks in [CT Acronym] trial'?",
+				"Score the message '[Product]: Once-daily 45mg oral tablet, no dose adjustment needed for mild-moderate hepatic impairment'",
+				"Predict the scores of '[Product] Support Program offers eligible patients financial assistance, nurse navigators, and educational resources'",
 			],
 		},
 		{
@@ -20,7 +20,7 @@
 			clickable: false,
 			content: [
 				"Predicts Message score using ZoomRx Message Benchmarks",
-				"Creates Messages using GPT",
+				"Provides feedback on given message to improve the effectiveness"
 			],
 		},
 	];
