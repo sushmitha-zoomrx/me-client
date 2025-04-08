@@ -8,7 +8,8 @@
 		"format": "npx prettier --write \"{,!(node_modules|public|dist)/**/}*.{js,svelte}\"",
 		"preview": "vite preview",
 		"dev": "vite --config config/vite.config.js --host",
-		"build": "vite --config config/vite.config.js build"
+		"build": "vite --config config/vite.config.js build",
+		"start": "vite preview --port 4173"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^2.0.2",

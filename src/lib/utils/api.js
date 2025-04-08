@@ -61,20 +61,20 @@ export const SERVER_ERROR_CODE = {
 export const post = async (
 	url = '',
 	data = null,
-	headers = {},
+	headers = {
+		'Content-Type': 'application/json',
+		// ...headers,
+	},
 	options = {}
 ) => {
 	// headers = setBearer(headers);
 
-	const response = await fetch('http://localhost:8000/messages', {
+	const response = await fetch(`${import.meta.env.VITE_SERVER_URL}` + url, {
 		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			// ...headers,
-		},
+		headers: headers,
 		referrerPolicy: 'no-referrer',
 		signal: options.signal,
-		body: options.noFormat ? data : JSON.stringify(data),
+		body: data,
 	});
 
 	return await responseHandler(response);

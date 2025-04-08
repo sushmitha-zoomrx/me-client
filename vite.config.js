@@ -8,22 +8,16 @@ const projectRootDir = path.dirname(filename);
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: './', // This ensures assets use relative paths
 	resolve: {
 		alias: {
-			'@components': path.resolve(
-				projectRootDir,
-				'../src/lib/components'
-			),
-			'@stores': path.resolve(projectRootDir, '../src/lib/stores'),
-			'@utils': path.resolve(projectRootDir, '../src/lib/utils'),
-			'@models': path.resolve(projectRootDir, '../src/lib/models'),
+			'@': path.resolve(__dirname, './src'),
 		},
 	},
 	plugins: [svelte({ configFile: './config/svelte.config.js' })],
 	build: {
-		target: 'es2015',
-	},
-	css: {
-		postcss: './config/postcss.congif.js',
+		outDir: 'dist',
+		assetsDir: 'assets',
+		emptyOutDir: true,
 	},
 });

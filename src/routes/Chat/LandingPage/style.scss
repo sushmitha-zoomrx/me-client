@@ -1,6 +1,6 @@
 .landing {
     display: grid;
-    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
     gap: 0.875rem;
     width: 50%;
     min-height: 100%;
@@ -14,7 +14,7 @@
         justify-content: center;
         flex-direction: column;
         gap: 10px;
-        font-size: 24px;
+        font-size: 18px;
         text-align: center;
         margin: 0 auto;
         color: #000714;
@@ -22,6 +22,7 @@
 
     &__container {
         display: flex;
+        width: 300px;
         flex-direction: column;
         gap: 0.875rem;
         margin: 10px 0;
@@ -32,7 +33,7 @@
         background: #dedede;
         border: 1px solid rgb(169, 169, 169);
         border-radius: 10px;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 20px;
         text-align: center;
         color: #141414;
@@ -47,8 +48,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         background: rgb(102, 102, 102);
         color: #141414;
