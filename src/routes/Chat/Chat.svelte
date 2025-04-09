@@ -61,10 +61,13 @@
 	async function getResponseFromServer(question, index) {
 		console.log("About to hit server as :");
 		console.log(get(email));
-		const { responseData } = await post("/messages", {
-			question: question,
-			email: get(email),
-		});
+		const { responseData } = await post(
+			"/messages",
+			JSON.stringify({
+				question: question,
+				email: get(email),
+			})
+		);
 		console.log("Response received");
 		console.log(responseData);
 		responseData.answer = responseData.data;
@@ -92,10 +95,13 @@
 		await scrollChatContainerToBottom();
 		isSearchInprogress = true;
 		try {
-			const { responseData } = await post("/messages", {
-				question: question,
-				email: get(email),
-			});
+			const { responseData } = await post(
+				"/messages",
+				JSON.stringify({
+					question: question,
+					email: get(email),
+				})
+			);
 			console.log("Response received");
 			console.log(responseData);
 			responseData.answer = responseData.data;
@@ -118,25 +124,33 @@
 		const file = event.target.files[0];
 		if (file) {
 			const fileName = file.name;
-			conversations.push([{ question: `Predict the scores for ${fileName}` }]); // Add user message
+			conversations.push([
+				{ question: `Predict the scores for ${fileName}` },
+			]); // Add user message
 			const index = conversations.length - 1;
 			conversations = conversations; // force update
 			await scrollChatContainerToBottom();
-			isCsvUploadInprogress = true; // Disable search bar while processing
-			csvUploadProgress = "."; // Initialize progress dots
+			isCsvUploadInprogress = true;
+			csvUploadProgress = ".";
 			let progressInterval = setInterval(() => {
 				csvUploadProgress += ".";
-				conversations[index][0].question = `Predict the scores for ${fileName} ${csvUploadProgress}`; // Update user message with progress
+				conversations[
+					index
+				][0].question = `Predict the scores for ${fileName} ${csvUploadProgress}`;
 				conversations = conversations; // force update
 			}, 500);
 
 			try {
 				const formData = new FormData();
-				formData.append("file", file, fileName); // Append the file to the FormData object
-				formData.append("email", get(email)); // Append the email to the FormData object
-				const { responseData } = await post("/messages/bulk", formData, {
-					noFormat: true,
-				});
+				formData.append("file", file, fileName);
+				formData.append("email", get(email));
+				const { responseData } = await post(
+					"/messages/bulk",
+					formData,
+					{
+						noFormat: true,
+					}
+				);
 
 				if (responseData.success) {
 					clearInterval(progressInterval); // Stop progress dots
@@ -144,20 +158,27 @@
 					console.log("CSV uploaded and processed successfully");
 					// Assuming responseData contains the processed CSV data
 					if (responseData.processedCsvData) {
-						downloadCsv(responseData.processedCsvData, "processed_data.csv");
-						isCsvUploadInprogress=false
-						responseData.answer =  "The processed file is downloaded.";
-						conversations[index][conversations[index].length - 1].response = responseData;
+						downloadCsv(
+							responseData.processedCsvData,
+							"processed_data.csv"
+						);
+						isCsvUploadInprogress = false;
+						responseData.answer =
+							"The processed file is downloaded.";
+						conversations[index][
+							conversations[index].length - 1
+						].response = responseData;
 						conversations[index][
 							conversations[index].length - 1
 						].isRenderingComplete = true;
 					} else {
-						console.warn("No processed CSV data received from the server.");
-						isCsvUploadInprogress=false
+						console.warn(
+							"No processed CSV data received from the server."
+						);
+						isCsvUploadInprogress = false;
 						conversations[index].push({
 							response: {
-								answer:
-									"No processed CSV data received from the server. Please try again later or contact our support team.",
+								answer: "No processed CSV data received from the server. Please try again later or contact our support team.",
 							},
 						}); // Add system message
 					}
@@ -167,7 +188,9 @@
 					console.error("CSV upload failed:", responseData.error);
 					conversations[index].push({
 						error: true,
-						response: { answer: `CSV upload failed: ${responseData.error}` },
+						response: {
+							answer: `CSV upload failed: ${responseData.error}`,
+						},
 					}); // Add system message
 				}
 			} catch (error) {
@@ -221,10 +244,11 @@
 			</section>
 			<footer class="chat__footer">
 				<section class="chat__search-bar">
-
 					<label for="csvUpload" class="csv-upload-button">
 						<img src={uploadIcon} alt="Upload CSV" />
-						<span class="csv-upload-info">(Mandatory Column name: message)</span>
+						<span class="csv-upload-info"
+							>(Mandatory Column name: message)</span
+						>
 						<input
 							type="file"
 							id="csvUpload"
@@ -236,13 +260,17 @@
 					<SearchBar
 						focusOnLoad={true}
 						bind:value={questionSearch}
-						disableSearchBtn={isSearchInprogress || isCsvUploadInprogress}
+						disableSearchBtn={isSearchInprogress ||
+							isCsvUploadInprogress}
 						onClickHandler={() => generateResponse(questionSearch)}
 					/>
 					{#if conversations.length > 2 && showScrollToBottom}
-							<button class="scroll-to-bottom" on:click={scrollChatContainerToBottom}>
-								<img src={arrowDown} alt="scroll to bottom" />
-							</button>
+						<button
+							class="scroll-to-bottom"
+							on:click={scrollChatContainerToBottom}
+						>
+							<img src={arrowDown} alt="scroll to bottom" />
+						</button>
 					{/if}
 				</section>
 				<div class="chat__footer-info">
