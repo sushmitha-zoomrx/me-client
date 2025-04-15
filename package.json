@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"dev": "vite --config config/vite.config.js --host",
 		"build": "vite --config config/vite.config.js build",
-		"start": "vite preview --port 4173"
+		"start": "vite preview --port 5173"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^2.0.2",

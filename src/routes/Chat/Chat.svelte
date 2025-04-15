@@ -29,6 +29,7 @@
 	let isMobileView = false;
 	let showUploadInfo = false; // Add a flag to control the visibility of the upload info
 	let csvUploadProgress = ""; // Add a variable to show upload progress
+	let use_llm = false; // Add this variable with default value true
 
 	onMount(async () => {
 		await scrollChatContainerToBottom();
@@ -100,6 +101,7 @@
 				JSON.stringify({
 					question: question,
 					email: get(email),
+					use_llm: use_llm, // Add this parameter
 				})
 			);
 			console.log("Response received");
@@ -262,7 +264,12 @@
 						bind:value={questionSearch}
 						disableSearchBtn={isSearchInprogress ||
 							isCsvUploadInprogress}
-						onClickHandler={() => generateResponse(questionSearch)}
+						onClickHandler={() =>
+							generateResponse(
+								questionSearch,
+								conversations.length
+							)}
+						bind:use_llm
 					/>
 					{#if conversations.length > 2 && showScrollToBottom}
 						<button
